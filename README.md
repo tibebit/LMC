@@ -16,7 +16,7 @@ python main.py --file <nome_file_assembly> [--input <coda_input>] [--mode <modal
 | Argomento      | Obbligatorio | Descrizione                                                                 |
 |----------------|--------------|-----------------------------------------------------------------------------|
 | `--file`       | Sì           | Il file contenente le istruzioni assembly (esempio: `quine.lmc`).           |
-| `--input`      | No           | La coda di input, specificata come numeri interi separati da virgole (es: `5,10,15`). |
+| `--input`      | No           | La coda di input (es: 6,5). |
 | `--mode`       | No           | La modalità di esecuzione (`all` o `steps`). Default: `all`.                |
 
 ### Modalità di Esecuzione
