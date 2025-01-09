@@ -41,7 +41,6 @@ class Converter:
             machine_code = self.assembler.parse_assembly_action(instruction)
         if len(instruction) == 1:
             machine_code = self.assembler.parse_assembly_inout(instruction)
-        # qui dovrei gestire l'assenza di dato
         return machine_code
 
 
@@ -75,7 +74,7 @@ class Converter:
     def get_results(self):
         return self.lmc.output_queue.items
 
-
+# classe per la visualizzazione dello stato interno del LMC
 class Summary:
     def __init__(self, program_counter, accumulator, memory, output_queue, input_queue):
         self.program_counter = program_counter

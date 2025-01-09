@@ -49,7 +49,7 @@ def main():
                 summary = converter.summary()
                 print(summary)
                 input("Premi INVIO per eseguire il prossimo passo...")
-                converter.run_lmc_step()  # Metodo per eseguire un singolo passo
+                converter.run_lmc_step()
             print("Programma terminato con la seguente coda di output:", converter.get_results())
     except ValueError:
         print("Errore: inserire numeri interi separati da virgole")

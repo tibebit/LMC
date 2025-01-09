@@ -11,7 +11,7 @@ class LMC:
         self.program_counter = 0
         self.input_queue = Queue()
         self.output_queue = Queue()
-        self.flag = False  # False: within 0...999; True: out of range
+        self.flag = False
         self.halted = False
 
         self.instructions = {
@@ -26,9 +26,6 @@ class LMC:
         }
 
     def fetch(self):
-        """
-        Recupera la cella corrente dalla memoria e incrementa il program counter.
-        """
         if not (0 <= self.program_counter < len(self.cells)):
             raise IndexError("Program counter fuori dai limiti.")
         cell = self.cells[self.program_counter]
@@ -36,34 +33,22 @@ class LMC:
         return cell
 
     def decode_and_execute(self, cell: Instruction):
-        """
-        Decodifica ed esegue un'istruzione.
-        """
         if cell.opcode in self.instructions:
             self.instructions[cell.opcode](cell.address)
         else:
             raise ValueError(f"Opcode non valido: {cell.opcode}")
 
     def sum(self, address: int):
-        """
-        Somma il contenuto della cella all'accumulatore.
-        """
         value = self._get_cell_value(address)
         self.accumulator = (self.accumulator + value) % 1000
         self.flag = self.accumulator < 0 or self.accumulator > 999
 
     def sub(self, address: int):
-        """
-        Sottrae il contenuto della cella all'accumulatore.
-        """
         value = self._get_cell_value(address)
         self.accumulator = (self.accumulator - value) % 1000
         self.flag = self.accumulator < 0 or self.accumulator > 999
 
     def store(self, address: int):
-        """
-        Memorizza il valore dell'accumulatore in una cella.
-        """
         self._validate_address(address)
         self.cells[address].content = self.accumulator
 
@@ -104,7 +89,7 @@ class LMC:
         cell = self.cells[address]
         if isinstance(cell, Content):
             return cell.content
-        raise HaltException("Tentativo di interpretare un dato come istruzione.")
+        raise HaltException("Dato interpretato come istruzione.")
 
     def _validate_address(self, address: int):
         if not (0 <= address < len(self.cells)):

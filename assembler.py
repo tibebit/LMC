@@ -22,8 +22,7 @@ class Assembler:
         self.lmc = LMC()
         self.filename = filename
         self.labels = {}
-        # forse serve tenere traccia anche delle istruzioni eseguite finora?
-        self.instructions_given = 0 # in teoria questo potrebbe essere un compito del LMC
+        self.instructions_given = 0
 
     def load_memory(self):
         instr = []
@@ -32,7 +31,6 @@ class Assembler:
                 for line in f:
                     line = line.split('//')[0].strip()
                     # se la riga non è vuota, aggiungila all'array
-                    # forse va controllato anche che ogni stringa contenga al piu tre istruzioni sulla stessa riga
                     if line:
                         instr.append(self.instruction_normalization(line))
                         self.instructions_given += 1
